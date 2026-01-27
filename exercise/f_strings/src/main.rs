@@ -13,7 +13,7 @@
 fn main() {
     // 1. Using unicode escape codes, use println to print out a sparkles emoji (codepoint 2728).
 
-    // println!( ... );
+    println!("\u{2728}");
 
     // 2. Uncomment the commented line below and set the value of `favorite` to the emoji "🍓"
     // (codepoint 1f353).
@@ -21,7 +21,7 @@ fn main() {
     // - You can type (or copy-and-paste) in the strawberry emoji, or use unicode escape codes.
     // - Use .to_string() to convert the string literal into a String.
 
-    let mut favorite = String::new();
+    let mut favorite = "🍓";
     // favorite = ...
     if favorite != "" {
         println!("Everyone's favorite fruit is: {favorite}");
@@ -35,8 +35,8 @@ fn main() {
     // for all
     // great men
 
-    // let saying = "Now ...
-    // println!("{saying}");
+    let saying = "Now is \nthe time\nfor all\ngreat men";
+    println!("{saying}");
 
     // Challenge: Change the string literal in #3 so that it:
     //
