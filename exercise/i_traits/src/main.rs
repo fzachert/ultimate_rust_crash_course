@@ -6,7 +6,15 @@
 //
 // You must also complete 1b before the code will compile.
 
-// trait Colorful ...
+trait Colorful
+{
+    fn color(self: &Self) -> String;
+}
+
+trait EvenOdd
+{
+    fn is_even(self: &Self) -> bool;
+}
 
 // 1b. Implement the `Colorful` trait for the `Hat` struct:
 //
@@ -22,16 +30,55 @@ struct Hat {
     size: i32,
 }
 
-// impl Colorful for Hat ...
+impl Colorful for Hat
+{
+    fn color(self: &Self) -> String
+    {
+        if  self.size >= 0 && self.size <= 5
+        {
+            String::from("red")
+        }
+        else if self.size == 6 || self.size == 7
+        {
+            String::from("green")
+        }
+        else
+        {
+            String::from("blue")
+        }
+    }
+}
+
+impl EvenOdd for i32
+{
+    fn is_even(self: &Self) -> bool {
+        self % 2 == 0
+    }
+}
+
+impl Colorful for i32
+{
+    fn color(self: &Self) -> String
+    {
+        if self.is_even()
+        {
+            String::from("orange")
+        }
+        else
+        {
+            String::from("purple")
+        }
+    }        
+}
 
 fn main() {
     // 1c. Uncomment and run the code below. If you correctly implemented Colorful for Hat, then
     // the order of the colors in the output will be red, green, and blue.
 
-    // let small_hat = Hat { size: 2 };
-    // let medium_hat = Hat { size: 7 };
-    // let large_hat = Hat { size: 100 };
-    // describe_three_hats(&small_hat, &medium_hat, &large_hat);
+    let small_hat = Hat { size: 2 };
+    let medium_hat = Hat { size: 7 };
+    let large_hat = Hat { size: 100 };
+    describe_three_hats(&small_hat, &medium_hat, &large_hat);
 
     // 2. Implement the Colorful trait for the type i32. The `colorful` method for an i32 should
     // return these String values:
@@ -42,8 +89,9 @@ fn main() {
     //
     // Hint: You may want to use the `is_even` function (see the bottom of this file).
 
-    // println!("4 is {}", 4.color());
-    // println!("5 is {}", 5.color());
+
+    println!("4 is {}", 4.color());
+    println!("5 is {}", 5.color());
 
     // 3. Let's replace the is_even function with a trait implementation!
     //
@@ -62,11 +110,14 @@ fn main() {
     //
     // Hint: There's a bit of commented-out code below the main function to help you get started.
 
-    // fortune(small_hat);
-    // fortune(2);
+    fortune(small_hat);
+    fortune(2);
 }
 
-// fn fortune<T: Colorful>(...
+fn fortune<T: Colorful>(obj: T)
+{
+    println!("The color I see in your future is {}", obj.color())
+}
 
 // A function used by some provided code.
 fn describe_three_hats(hat1: &Hat, hat2: &Hat, hat3: &Hat) {
@@ -82,8 +133,3 @@ fn describe_three_hats(hat1: &Hat, hat2: &Hat, hat3: &Hat) {
     }
 }
 
-// You can use this function to check if a number is even (true) or odd (false).
-// You should comment out this function for #3.
-fn is_even(number: i32) -> bool {
-    number % 2 == 0
-}
